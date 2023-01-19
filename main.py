@@ -4,7 +4,7 @@
 #file structure - "key","value"
 
 
-def search(file_header,key : Str) ->int : # vikram
+def search(file_header,key : str) ->int : # vikram
 	"""
 	returns the positon to be seeked
 
@@ -14,7 +14,7 @@ def search(file_header,key : Str) ->int : # vikram
 
 
 
-def insert(file_header,key: Str, value: Str) -> None: #dinesh
+def insert(file_header,key: str, value: str) -> None: #dinesh
 
 	"""
 	Inserts the contents to the file in the format
@@ -27,14 +27,14 @@ def insert(file_header,key: Str, value: Str) -> None: #dinesh
   pass
 
 
-def delete(file_header,key: Str) -> None: #jayson
+def delete(file_header,key: str) -> None: #jayson
 	"""
 	Removes the row if key exist
 	if not exist Should say key not exist
 	"""
   pass
 
-def find_value(file_header, key: Str) -> None #Hari
+def find_value(file_header, key: str) -> None #Hari
 	"""
 	Prints the value 
 	if value does not exists print key not found!
