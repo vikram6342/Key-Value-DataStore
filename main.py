@@ -1,20 +1,47 @@
+from typing import TextIO
+import re
 
 
 
 #file structure - "key","value"
 
+def parseKeyValue(line : str) -> tuple :
+	"""
+	Returns the key value pair in the line
+	
+	inputs : line -> type : string
+	line is a string with the general format "key","value"
+	"""
 
-def search(file_header,key : str) ->int : # vikram
+	search = re.search(r"(\".*\"),(\".*\")", line)
+	pair = (search.group(1), search.group(2))
+	return pair
+
+
+
+def search(file_header : TextIO,key : str) ->int : # vikram
 	"""
 	returns the positon to be seeked
 
 	-1 if element not found 
 	"""
-	pass
+	loc = -1
+	file_header.seek(0)
+	line = file_header.readline()
+	while line:
+		line = line.strip("\n")
+		foundKey, foundValue = parseKeyValue(line= line)
+		foundKey = foundKey[1 : len(foundKey) -1]
+		if foundKey == key:
+			loc = file_header.tell() - len(line) - 2
+			break
+		line = file_header.readline()
+
+	return loc
 
 
 
-def insert(file_header,key: str, value: str) -> None: #dinesh
+def insert(file_header : TextIO, key: str, value: str) -> None: #dinesh
 
 	"""
 	Inserts the contents to the file in the format
@@ -24,22 +51,22 @@ def insert(file_header,key: str, value: str) -> None: #dinesh
 	Insetion should update when key exist	
 
 	"""
-  pass
+	pass
 
 
-def delete(file_header,key: str) -> None: #jayson
+def delete(file_header : TextIO, key: str) -> None: #jayson
 	"""
 	Removes the row if key exist
 	if not exist Should say key not exist
 	"""
-  pass
+	pass
 
-def find_value(file_header, key: str) -> None #Hari
+def find_value(file_header : TextIO, key: str) -> None: #Hari
 	"""
 	Prints the value 
 	if value does not exists print key not found!
  	"""
-  pass
+	pass
 
 
 #Hari -> file obj create 
