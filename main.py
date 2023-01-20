@@ -59,7 +59,16 @@ def delete(file_header : TextIO, key: str) -> None: #jayson
 	Removes the row if key exist
 	if not exist Should say key not exist
 	"""
-	pass
+	if search(file_header, key) != -1:
+		file_header.seek(search(file_header, key))
+		line = f.readlines()
+		del line[0]
+		f.seek(search(file_header, key))
+		for i in line:
+			file_header.write(i)
+		file_header.truncate()
+	else:
+		print("not exsist")
 
 def find_value(file_header : TextIO, key: str) -> None: #Hari
 	"""
