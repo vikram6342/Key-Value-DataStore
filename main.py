@@ -51,6 +51,15 @@ def insert(file_header : TextIO, key: str, value: str) -> None: #dinesh
 	Insetion should update when key exist	
 
 	"""
+	# for key is exist
+	if search(file_header,key,value)!=-1:
+		file_header.seek(0,2)
+		delete(file_header,key,value)
+		file_header.writeline(f"\"{key}\",\"{value}\"""\n")    
+	#for key is not exist
+	if search(file_header,key,value)==-1:
+		file_header.seek(0,2)
+		file_header.writeline(f"\"{key}\",\"{value}\"""\n")
 	pass
 
 
