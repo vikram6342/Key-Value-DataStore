@@ -52,14 +52,13 @@ def insert(file_header : TextIO, key: str, value: str) -> None: #dinesh
 
 	"""
 	# for key is exist
-	if search(file_header,key,value)!=-1:
-		file_header.seek(0,2)
-		delete(file_header,key,value)
-		file_header.writeline(f"\"{key}\",\"{value}\"""\n")    
+	if search(file_header,key) != -1:
+		delete(file_header, key)   
 	#for key is not exist
-	if search(file_header,key,value)==-1:
-		file_header.seek(0,2)
-		file_header.writeline(f"\"{key}\",\"{value}\"""\n")
+	file_header.seek(0,2)
+	file_header.write(f"\"{key}\",\"{value}\"""\n")
+	file_header.flush()
+
 	pass
 
 
@@ -100,24 +99,13 @@ def find_value(file_header : TextIO, key: str) -> None: #Hari
 		l = file_header.readline()
 		l = l.strip("\n")
 		fkey,fvalue = parseKeyValue(l)
-		print("Value is ",fvalue)
+		print("Value is ",fvalue[1 : len(fvalue) - 1])
 		
 	pass
 	
 
-#Hari -> file obj create 
-#			Menu driven program 
 
-#1 -> insert
-#2 -> delete
-#key ->32 value -> 1mb
 
-#Insert/ Update
-#Delete
-#Find 
-
-#f = open("filename.txt", "r+")
-	
 def keylimit() :
 	key = input()
 	if(len(key)<=32):
@@ -143,15 +131,14 @@ def func() :
 	print("\t0. EXIT")
 
 	file_header = open("DataStore.txt","r+")
-
+	print("Enter the menu : ")
+	menu = int(input())
+	
 	while(menu<=3 & menu!=0):
-		print("Enter the menu : ")
-		menu = int(input())
 		if(menu == 1):
 			key = keylimit()
 			value = valuelimit()
 			insert(file_header,key,value)
-			func()
 		elif(menu == 2):
 			key = keylimit()
 			delete(file_header,key)
@@ -162,7 +149,8 @@ def func() :
 			
 		else :
 			print("Enter correct menu ")
-		
+		print("Enter the menu : ")
+		menu = int(input())
 func()	
 
 		
