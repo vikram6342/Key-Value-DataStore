@@ -51,6 +51,17 @@ def insert(file_header : TextIO, key: str, value: str) -> None: #dinesh
 	Insetion should update when key exist	
 
 	"""
+	line=f.readline()
+    if key,value in line:
+        line=line.rstrip("\"key\",")
+        line=value.replace(line,"\"value\"")
+        print(line)
+    with open(f) as file:
+        lines=file1.readline()
+    lines[len(lines)-1]=value
+    print(lines)
+	f=open("dict.txt","r+")
+	value=input("text:")        
 	pass
 
 
