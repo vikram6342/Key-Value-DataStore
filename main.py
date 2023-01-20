@@ -83,8 +83,20 @@ def find_value(file_header : TextIO, key: str) -> None: #Hari
 	Prints the value 
 	if value does not exists print key not found!
  	"""
+	i = search(file_header,key)
+	if(i==-1):
+		print("Value Not Found")
+	else:
+		file_header.seek(i)
+		l = file_header.readline()
+		l = l.strip("\n")
+		fkey,fvalue = parseKeyValue(l)
+		print("Value is ",fvalue)
+		
 	pass
 
+
+	
 
 #Hari -> file obj create 
 #			Menu driven program 
@@ -98,3 +110,56 @@ def find_value(file_header : TextIO, key: str) -> None: #Hari
 #Find 
 
 #f = open("filename.txt", "r+")
+	
+def keylimit() :
+	key = input()
+	if(len(key)<=32):
+		return key
+	else :
+		print("Size of Key should be less than 32 char")
+		keylimit()
+
+def valuelimit() :
+	value = input()
+	if(len(value)<=1000*1000):
+		return value
+	else:
+		print("Size of Key should be less than 32 char")	
+		valuelimit()
+
+def func() :
+	print("Welcome !!!")
+	print("Please choose your menu")
+	print("\t1. Insert/Update")
+	print("\t2. Deletion")
+	print("\t3. Find value")
+	print("\t0. EXIT")
+
+	f = open("DataStore.txt","r+")
+
+	while(menu<=3 & menu!=0):
+		print("Enter the menu : ")
+		menu = int(input())
+		if(menu == 1):
+			file_header = f
+			key = keylimit()
+			value = valuelimit()
+			insert(file_header,key,value)
+			func()
+		elif(menu == 2):
+			file_header = f
+			key = keylimit()
+			delete(file_header,key)
+			
+		elif(menu == 3):
+			file_header = f
+			key = keylimit()
+			find_value(file_header,key)
+			
+		else :
+			print("Enter correct menu ")
+		
+func()	
+
+		
+
