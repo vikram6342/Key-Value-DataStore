@@ -60,16 +60,21 @@ def delete(file_header : TextIO, key: str) -> None: #jayson
 	if not exist Should say key not exist
 	"""
 	if search(file_header, key) != -1:
-		a=[]
 		file_header.seek(search(file_header, key))
-		line=f.readline()
+		a = file_header.tell()
+		line=file_header.readline()
+		n = file_header.tell()
 		while line != "":
-			line = f.readline()
-			a.append(line)
-		file_header.seek(search(file_header, key))
-		for i in line:
-			file_header.write(i)
+			file_header.seek(n)
+			line = file_header.readline()
+			n = file_header.tell()
+			file_header.seek(a)
+			file_header.write(line)
+			a = file_header.tell()
+			s = file_header.tell()
+		file_header.seek(s)
 		file_header.truncate()
+		
 	else:
 		print("not exsist")
 
