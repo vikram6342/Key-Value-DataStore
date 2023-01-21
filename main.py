@@ -59,7 +59,6 @@ def insert(file_header : TextIO, key: str, value: str) -> None: #dinesh
 	file_header.write(f"\"{key}\",\"{value}\"""\n")
 	file_header.flush()
 
-	pass
 
 
 def delete(file_header : TextIO, key: str) -> None: #jayson
@@ -101,7 +100,6 @@ def find_value(file_header : TextIO, key: str) -> None: #Hari
 		fkey,fvalue = parseKeyValue(l)
 		print("Value is ",fvalue[1 : len(fvalue) - 1])
 		
-	pass
 	
 
 
